@@ -8,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
     private UserService userService;
 
@@ -17,7 +16,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String showAllUsers(ModelMap model) {
         model.addAttribute("users", userService.getAllUsers());
         return "users";
@@ -42,7 +41,7 @@ public class UserController {
     @PostMapping("/delete")
     public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteUserById(id);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     @GetMapping("/update")
@@ -54,6 +53,6 @@ public class UserController {
     @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") User user) {
         userService.updateUser(user);
-        return "redirect:/users";
+        return "redirect:/";
     }
 }
